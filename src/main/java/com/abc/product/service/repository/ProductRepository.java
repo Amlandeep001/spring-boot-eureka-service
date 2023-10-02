@@ -9,6 +9,6 @@ import com.abc.product.service.entity.Product;
  * @author amlandeep.nandi
  *
  */
-public interface ProductRepository extends JpaRepository<Product, Long>{
-
+public interface ProductRepository extends JpaRepository<Product, Long>
+{
 }

@@ -22,7 +22,6 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "product")
 public class Product
 {
-
 	@Id
 	Long id;
 	String productname;
@@ -31,5 +30,4 @@ public class Product
 	BigDecimal price;
 	LocalDate expiryDate;
 	LocalDate manufacturedDate;
-
 }

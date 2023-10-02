@@ -17,13 +17,13 @@ import com.abc.product.service.repository.ProductRepository;
  *
  */
 @RestController
-public class ProductController {
-
+public class ProductController
+{
 	private final ProductRepository productRepo;
 
-	ProductController(ProductRepository productRepo) {
+	ProductController(ProductRepository productRepo)
+	{
 		this.productRepo = productRepo;
-
 	}
 
 	/**
@@ -32,12 +32,14 @@ public class ProductController {
 	 * @return list of products
 	 */
 	@RequestMapping("/products")
-	public List<Product> fetchAll() {
+	public List<Product> fetchAll()
+	{
 		return (List<Product>) productRepo.findAll();
 	}
 
 	@RequestMapping("/products/{id}")
-	public Product fetchByID(@PathVariable("id") Long id) {
+	public Product fetchByID(@PathVariable("id") Long id)
+	{
 		return productRepo.findById(id).orElse(null);
 	}
 
@@ -48,7 +50,8 @@ public class ProductController {
 	 * @return product
 	 */
 	@RequestMapping(value = "/products", method = RequestMethod.POST)
-	public Product store(@RequestBody Product product) {
+	public Product store(@RequestBody Product product)
+	{
 		return productRepo.save(product);
 	}
 
@@ -61,22 +64,29 @@ public class ProductController {
 	 */
 
 	@RequestMapping(value = "/update/{id}")
-	public Product editById(@RequestBody Product product, @PathVariable("id") Long id) {
+	public Product editById(@RequestBody Product product, @PathVariable("id") Long id)
+	{
 		Product existingProduct = fetchByID(id);
-		if (existingProduct != null) {
-			if (product.getProductname() != null) {
+		if(existingProduct != null)
+		{
+			if(product.getProductname() != null)
+			{
 				existingProduct.setProductname(product.getProductname());
 			}
-			if (product.getQuantity() != null) {
+			if(product.getQuantity() != null)
+			{
 				existingProduct.setQuantity(product.getQuantity());
 			}
-			if (product.getBrand() != null) {
+			if(product.getBrand() != null)
+			{
 				existingProduct.setBrand(product.getBrand());
 			}
-			if (product.getPrice() != null) {
+			if(product.getPrice() != null)
+			{
 				existingProduct.setPrice(product.getPrice());
 			}
-			if (product.getExpiryDate() != null) {
+			if(product.getExpiryDate() != null)
+			{
 				existingProduct.setExpiryDate(product.getExpiryDate());
 			}
 			return productRepo.save(existingProduct);
@@ -91,13 +101,14 @@ public class ProductController {
 	 */
 
 	@RequestMapping(value = "/delete/{id}")
-	public boolean delete(@PathVariable("id") Long id) {
+	public boolean delete(@PathVariable("id") Long id)
+	{
 		Product product = fetchByID(id);
-		if (product == null) {
+		if(product == null)
+		{
 			return false;
 		}
 		productRepo.delete(product);
 		return true;
 	}
-
 }
