@@ -2,10 +2,12 @@ package com.abc.product.service.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abc.product.service.entity.Product;
@@ -31,13 +33,13 @@ public class ProductController
 	 * 
 	 * @return list of products
 	 */
-	@RequestMapping("/products")
+	@GetMapping("/products")
 	public List<Product> fetchAll()
 	{
 		return (List<Product>) productRepo.findAll();
 	}
 
-	@RequestMapping("/products/{id}")
+	@GetMapping("/products/{id}")
 	public Product fetchByID(@PathVariable("id") Long id)
 	{
 		return productRepo.findById(id).orElse(null);
@@ -49,7 +51,7 @@ public class ProductController
 	 * @param product
 	 * @return product
 	 */
-	@RequestMapping(value = "/products", method = RequestMethod.POST)
+	@PostMapping("/products")
 	public Product store(@RequestBody Product product)
 	{
 		return productRepo.save(product);
@@ -63,7 +65,7 @@ public class ProductController
 	 * @return
 	 */
 
-	@RequestMapping(value = "/update/{id}")
+	@PutMapping("/update/{id}")
 	public Product editById(@RequestBody Product product, @PathVariable("id") Long id)
 	{
 		Product existingProduct = fetchByID(id);
@@ -100,7 +102,7 @@ public class ProductController
 	 * @param id
 	 */
 
-	@RequestMapping(value = "/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public boolean delete(@PathVariable("id") Long id)
 	{
 		Product product = fetchByID(id);
