@@ -40,7 +40,7 @@ public class ProductController
 	}
 
 	@GetMapping("/products/{id}")
-	public Product fetchByID(@PathVariable("id") Long id)
+	public Product fetchByID(@PathVariable Long id)
 	{
 		return productRepo.findById(id).orElse(null);
 	}
@@ -66,7 +66,7 @@ public class ProductController
 	 */
 
 	@PutMapping("/update/{id}")
-	public Product editById(@RequestBody Product product, @PathVariable("id") Long id)
+	public Product editById(@RequestBody Product product, @PathVariable Long id)
 	{
 		Product existingProduct = fetchByID(id);
 		if(existingProduct != null)
@@ -103,7 +103,7 @@ public class ProductController
 	 */
 
 	@DeleteMapping("/delete/{id}")
-	public boolean delete(@PathVariable("id") Long id)
+	public boolean delete(@PathVariable Long id)
 	{
 		Product product = fetchByID(id);
 		if(product == null)
